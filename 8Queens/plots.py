@@ -4,7 +4,7 @@ import matplotlib.patches as patches
 import csv
 import os
 
-os.makedirs("../figures", exist_ok=True)
+os.makedirs("figures", exist_ok=True)
 
 # Color palette per parameter sweep group
 SWEEP_COLORS = {
@@ -21,10 +21,10 @@ SWEEP_GROUPS = {
 
 
 def load_data():
-    histories = np.load("../results/histories.npy", allow_pickle=True).item()
-    with open("../results/raw_runs.csv") as f:
+    histories = np.load("results/histories.npy", allow_pickle=True).item()
+    with open("results/raw_runs.csv") as f:
         raw = list(csv.DictReader(f))
-    with open("../results/summary.csv") as f:
+    with open("results/summary.csv") as f:
         summary = list(csv.DictReader(f))
     return histories, raw, summary
 
@@ -81,7 +81,7 @@ def plot_example_boards():
 
     plt.suptitle("8-Queens Board Representations", fontsize=13)
     plt.tight_layout()
-    plt.savefig("../figures/example_boards.png", dpi=150)
+    plt.savefig("figures/example_boards.png", dpi=150)
     plt.close()
     print("Saved: example_boards.png")
 
@@ -113,7 +113,7 @@ def plot_convergence(histories):
     axes[0].set_ylabel("Best fitness")
     plt.suptitle("Convergence Curves (mean ± std over 30 runs)", fontsize=13)
     plt.tight_layout()
-    plt.savefig("../figures/convergence_plot.png", dpi=150)
+    plt.savefig("figures/convergence_plot.png", dpi=150)
     plt.close()
     print("Saved: convergence_plot.png")
 
@@ -161,7 +161,7 @@ def plot_success_rates(summary):
     ax.legend(handles=legend, fontsize=9)
     plt.xticks(rotation=30, ha="right", fontsize=9)
     plt.tight_layout()
-    plt.savefig("../figures/success_rates.png", dpi=150)
+    plt.savefig("figures/success_rates.png", dpi=150)
     plt.close()
     print("Saved: success_rates.png")
 
@@ -194,7 +194,7 @@ def plot_boxplot(raw):
     ax.legend(fontsize=9)
     ax.grid(True, axis="y", linestyle="--", alpha=0.4)
     plt.tight_layout()
-    plt.savefig("../figures/boxplot.png", dpi=150)
+    plt.savefig("figures/boxplot.png", dpi=150)
     plt.close()
     print("Saved: boxplot.png")
 
@@ -220,7 +220,7 @@ def plot_search_space():
     ax.set_title("Search Space Comparison")
     ax.grid(True, axis="y", linestyle="--", alpha=0.4)
     plt.tight_layout()
-    plt.savefig("../figures/search_space.png", dpi=150)
+    plt.savefig("figures/search_space.png", dpi=150)
     plt.close()
     print("Saved: search_space.png")
 
@@ -238,4 +238,4 @@ if __name__ == "__main__":
         plot_boxplot(raw)
     except FileNotFoundError as e:
         print(f"Missing file: {e}\nRun experiment.py first.")
-    print("\nAll figures saved to ../figures/")
+    print("\nAll figures saved to figures/")

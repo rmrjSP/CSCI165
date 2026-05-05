@@ -25,8 +25,8 @@ def run_script(name):
         sys.exit(1)
 
 if __name__ == "__main__":
-    os.makedirs("../results", exist_ok=True)
-    os.makedirs("../figures", exist_ok=True)
+    os.makedirs("results", exist_ok=True)
+    os.makedirs("figures", exist_ok=True)
 
     run_script("experiment.py")
     run_script("plots.py")
@@ -35,7 +35,7 @@ if __name__ == "__main__":
     print("FINAL SUMMARY")
     print("="*75)
 
-    with open("../results/summary.csv") as f:
+    with open("results/summary.csv") as f:
         rows = list(csv.DictReader(f))
 
     header = (f"{'Config':<12} {'Pop':>5} {'Mut':>6} {'Tour':>5} "

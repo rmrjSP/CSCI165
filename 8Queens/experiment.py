@@ -9,7 +9,7 @@ from algorithms import evolutionary_algorithm, MAX_PAIRS
 N_RUNS      = 30
 BASE_SEED   = 42
 
-os.makedirs("../results", exist_ok=True)
+os.makedirs("results", exist_ok=True)
 
 # ── Experiment definitions ────────────────────────────────────────────────────
 # Three sweeps from the guide:
@@ -93,7 +93,7 @@ for exp in experiments:
 
 # ── Save raw results ──────────────────────────────────────────────────────────
 
-with open("../results/raw_runs.csv", "w", newline="") as f:
+with open("results/raw_runs.csv", "w", newline="") as f:
     writer = csv.DictWriter(f, fieldnames=raw_results[0].keys())
     writer.writeheader()
     writer.writerows(raw_results)
@@ -120,14 +120,14 @@ for exp in experiments:
         "mean_time_ms":     round(float(np.mean(times)) * 1000, 1),
     })
 
-with open("../results/summary.csv", "w", newline="") as f:
+with open("results/summary.csv", "w", newline="") as f:
     writer = csv.DictWriter(f, fieldnames=summary[0].keys())
     writer.writeheader()
     writer.writerows(summary)
 
 # ── Save best solutions ───────────────────────────────────────────────────────
 
-with open("../results/best_solutions.txt", "w") as f:
+with open("results/best_solutions.txt", "w") as f:
     f.write("Best solutions found per configuration\n")
     f.write("=" * 45 + "\n\n")
     for exp in experiments:
@@ -137,6 +137,6 @@ with open("../results/best_solutions.txt", "w") as f:
         f.write(f"{label}: best_fit={best['best_fit']}, "
                 f"gen={best['gen_found']}, run={best['run']}\n")
 
-np.save("../results/histories.npy", all_histories, allow_pickle=True)
+np.save("results/histories.npy", all_histories, allow_pickle=True)
 
-print("\nResults saved to ../results/")
+print("\nResults saved to results/")
